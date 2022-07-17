@@ -1,0 +1,65 @@
+/* Error */
+.error-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    background-color: var(--background);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 8;
+}
+
+.error-content .btn-primary {
+    margin-block-start: 20px;
+}
+
+.places {
+    margin: 1em;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+.places a {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    margin: 10px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 1px 5px #000;
+    font-size: 1.6rem;
+    font-weight: 900;
+    border-radius: 10px;
+    background-position: center;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    transition: all 0.3s ease-in-out;
+}
+
+.places a:hover {
+    transition: all 0.3s ease-in-out;
+    background-size: 150%;
+}
+
+
+.places a.bud {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25), #000), url(https://upload.wikimedia.org/wikipedia/commons/6/60/Budapest_Hungarian_Parliament_%2831363963556%29.jpg);
+}
+
+.places a.nyc {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25), #000), url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnckhp97TANALbXzu-l2kYj0ril1PnQcC-Ug&usqp=CAU);
+}
+
+.places a.lon {
+    background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25), #000), url(https://p4.wallpaperbetter.com/wallpaper/399/411/623/cities-city-london-wallpaper-preview.jpg);
+}
+
+
