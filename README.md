@@ -14,3 +14,8 @@ A simple webapp to display real-time weather information.
 - Displays the current weather forecast based on the user's location.
 - Shows detailed weather information such as temperature, humidity, wind speed, etc.
 - Presents interactive charts to visualize temperature and wind speed trends over time.
+
+## Deployment
+
+The webapp is deployed on [Vercel](https://vercel.com/). You can access it [here](https://weather-now-rose.vercel.app/).
+
