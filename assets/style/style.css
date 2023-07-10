@@ -180,7 +180,10 @@ body {
     display: none;
 }
 
-
+header {
+    position: relative;
+    z-index: 999999;
+}
 
 header .btn-primary .btn-location {
     display: none;
