@@ -8,7 +8,7 @@ export const weekDayNames = [
     'Thursday',
     'Friday',
     'Saturday'
-];
+]
 
 export const monthName = [
     'Jan',
