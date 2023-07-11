@@ -21,7 +21,7 @@ export const url = {
     forecast(lat, lon){
         return `https://api.openweathermap.org/data/2.5/forecast?${lat}&${lon}&units=metric`
     },
-    airPolution(lat, lon){
+    airPollution(lat, lon){
         return `https://api.openweathermap.org/data/2.5/air_pollution?${lat}&${lon}`
     },
     reverseGeo(lat, lon){
