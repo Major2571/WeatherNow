@@ -1,0 +1,74 @@
+.current-weather-card .weapper {
+    margin-block: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.current-weather-card .weather-icon {
+    margin-inline: auto;
+}
+
+.current-weather-card>.body-3 {
+    text-transform: capitalize;
+}
+
+.current-weather-card .meta-list {
+    margin-block-start: 1em;
+    padding-block-start: 1em;
+    border-block-start: 1px solid var(--outline);
+}
+
+.current-weather-card .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-block: 5px;
+}
+
+.current-weather-card .meta-item:not(:last-child) {
+    margin-block-end: 12px;
+}
+
+.current-weather-card .meta-text {
+    color: var(-on-surface-variant);
+}
+
+
+
+
+.forecast-card :is(.card-item, .icon-wrapper) {
+    display: flex;
+    align-items: center;
+}
+
+.forecast-card .card-item:not(:last-child) {
+    margin-block-end: 1em;
+    padding-block-end: 1em;
+    border-block-end: 1px solid var(--outline);
+}
+
+.forecast-card .icon-wrapper {
+    gap: 10px;
+}
+
+.icon-wrapper span {
+    margin-block-end: 0;
+    font-size: 1.2em;
+    font-weight: var(--weight-semiBold);
+}
+
+.forecast-card .label-1 {
+    color: var(--on-surface-variant);
+    font-size: 1.2em;
+    font-weight: var(--weight-semiBold);
+}
+
+.forecast-card .card-item>.label-1 {
+    width: 100%;
+    text-align: right;
+}
+
+.forecast h2 {
+    padding-top: 1em;
+}
