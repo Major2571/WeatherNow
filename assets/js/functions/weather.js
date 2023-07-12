@@ -58,7 +58,7 @@ export const updateWeather = function (lat, lon) {
 
             <div class="weapper">
                 <p class="heading">${parseInt(temp)}&deg;<sup>c</sup></p>
-                <img src="assets/images/weather_icons/${icon}.png" width="64" height="64" alt="${description}"
+                <img src="assets/images/weather_icons/${icon}.svg" width="64" height="64" alt="${description}"
                     class="weather-icon">
             </div>
 
@@ -256,7 +256,7 @@ export const updateWeather = function (lat, lon) {
                 tempLi.innerHTML = `
                     <div class="card card-sm slider-card">
                         <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
-                        <img src="./assets/images/weather_icons/${icon}.png" width="48" height="48" alt="${description}"
+                        <img src="./assets/images/weather_icons/${icon}.svg" width="48" height="48" alt="${description}"
                             loading="lazy" class="weather-icon" title="${description}">
                         <p class="body-3">${parseInt(temp)}&deg;</p>
                     </div>
@@ -288,8 +288,8 @@ export const updateWeather = function (lat, lon) {
             // 5 Day forecast
 
             forecastSection.innerHTML = `
-                <h2 class="title-2" id="forecast-label"> 5 Days Forecast </h2>
-                <div class="card card-lg forecast-card">
+                
+                <div class="forecast-card">
                     <ul data-forecast-list>
                     </ul>
                 </div>
@@ -298,9 +298,12 @@ export const updateWeather = function (lat, lon) {
             for (let i = 7, len = forecastList.length; i < len; i += 8) {
 
                 const {
-                    main: { temp_max },
+                    main: { temp_max, humidity },
                     weather,
-                    dt_txt
+                    dt_txt,
+                    wind: {
+                        speed: windSpeed
+                    }
                 } = forecastList[i];
 
                 const [{ icon, description }] = weather;
@@ -311,14 +314,32 @@ export const updateWeather = function (lat, lon) {
 
                 li.innerHTML = `
                     <div class="icon-wrapper">
-                        <img src="./assets/images/weather_icons/${icon}.png" width="36" height="36"
-                            alt="${description}" class="weather-icon" title=${description}>
-                        <span>
-                            <p classe="title-2">${parseInt(temp_max)}&deg;</p>
-                        </span>
+
+                        <div class="flex justify-between items-center content-center">
+                            <div>
+                                <p class="label-1"> ${module.weekDayNames[date.getDay()]} </p>
+                                <p class="body-3">${description}</p>
+                            </div>
+                            <img src="./assets/images/weather_icons/${icon}.svg" width="55" height="55" alt="${description}"
+                                class="weather-icon" title=${description}>
+                        </div>
+
+                        <div class="flex justify-between items-center content-center">
+                            <div>
+                                <div class="flex items-center">
+                                    <span class="m-icon">humidity_percentage</span>
+                                    <p class="forecast-info">${humidity}<sup>%</sup></p>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="m-icon">airwave</span>
+                                    <p class="forecast-info">${parseInt(module.mps_to_kmh(windSpeed))} km/h</p>
+                                </div>
+                            </div>
+                            <div class="forecast-temp">
+                                <p classe="title-2">${parseInt(temp_max)}&deg;</p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="label-1"> ${date.getDate()} ${module.monthNames[date.getMonth()]} </p>
-                    <p class="label-1"> ${module.weekDayNames[date.getDay()]} </p>
                 `;
 
                 forecastSection.querySelector('[data-forecast-list]').appendChild(li);
@@ -330,6 +351,107 @@ export const updateWeather = function (lat, lon) {
             container.classList.add('fade-in');
 
         });
+
+
+        // 24h Forecast section
+        // 24h Forecast section
+        fetchData(url.forecast(lat, lon), function (forecast) {
+            const {
+                list: forecastList,
+                city: { timezone },
+            } = forecast;
+
+            const labels = [];
+            const temperatures = [];
+            const icons = [];
+
+            forecastList.slice(0, 8).forEach((data) => {
+                const {
+                    dt: dateTimeUnix,
+                    main: { temp },
+                    weather,
+                } = data;
+
+                const formattedTime = module.getHours(dateTimeUnix, timezone);
+                const [{ icon }] = weather;
+
+                labels.push(formattedTime);
+                temperatures.push(temp);
+                icons.push(icon);
+            });
+
+            const chartElement = document.getElementById('weatherChart').getContext("2d");
+
+            var gradientFill = chartElement.createLinearGradient(0, 0, 0, 200);
+            gradientFill.addColorStop(0, "#C1D7F5");
+            gradientFill.addColorStop(1, "#F5F8FD");
+
+            const weatherChart = new Chart(chartElement, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Temperature',
+                            data: temperatures,
+                            borderColor: '#6da2e8',
+                            backgroundColor: gradientFill,
+                            pointRadius: 0,
+                            lineTension: 0.3,
+                            borderWidth: 2,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                            },
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold',
+                                },
+                            }
+                        },
+                        y: {
+                            display: false,
+                            suggestedMin: Math.min(...temperatures) - 3,
+                            suggestedMax: Math.max(...temperatures) + 3,
+                            grid: {
+                                display: false,
+                            },
+                        },
+                    },
+                    plugins: {
+                        legend: false,
+                        datalabels: {
+                            align: 'top',
+                            color: 'black',
+                            font: {
+                                size: 14,
+                                weight: 'bold',
+                            },
+                            formatter: function (value) {
+                                return Math.round(value) + '°';
+                            },
+                        },
+                    },
+                },
+                plugins: [ChartDataLabels],
+            });
+        });
+
+
+
+
+
 
     })
 }

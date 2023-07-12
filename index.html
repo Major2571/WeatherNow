@@ -30,6 +30,14 @@
     <script src="assets/js/app.js" type="module"></script>
     <script src="assets/js/route.js" type="module"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.0.1/dist/chartjs-plugin-annotation.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+
     <title>WeatherNow</title>
 </head>
 
@@ -38,7 +46,7 @@
     <header>
         <div class="container">
             <a href="#/current-location" class="logo">
-                <img src="assets/images/logo.png" alt="">
+                <img src="assets/images/weatherNow.svg" alt="">
             </a>
 
             <div class="search-view" data-search-view>
@@ -48,7 +56,8 @@
 
                     <span class="m-icon leading-icon">search</span>
 
-                    <button class="icon-btn leading-icon has-state rounded-full" aria-label="close search" data-search-toggler>
+                    <button class="icon-btn leading-icon has-state rounded-full" aria-label="close search"
+                        data-search-toggler>
                         <span class="m-icon">arrow_back</span>
                     </button>
                 </div>
@@ -83,26 +92,36 @@
                 weather" data-current-weather>
                 </section>
 
-                <!-- Forecast -->
-                <section class="section forecast" aria-labelledby="forecast-label" data-5-day-forecast>
 
-                </section>
             </div>
 
+
             <div class="content-right">
-                <section class="section highlights" aria-labelledby="highlights-label" data-highlights>
 
+                <!-- Forecast -->
+                <section class="section forecast" aria-labelledby="forecast-label" data-5-day-forecast>
                 </section>
+
+                <h2 class="title-2">Today at</h2>
+
+                <div class="m-auto w-1/2 py-5">
+                    <canvas id="weatherChart"></canvas>
+                </div>
+
                 <section class="section hourly-forecast" aria-label="hourly forecast" data-hourly-forecast>
+                </section>
 
-
+                <section class="section highlights" aria-labelledby="highlights-label" data-highlights>
                 </section>
             </div>
 
 
         </article>
+
+
         <div class="loading" data-loading></div>
     </main>
+
 
 
     <section class="error-content" data-error-content>

@@ -64,9 +64,9 @@
         margin-block: 20px;
     }
 
-    .forecast-card .card-item:not(:last-child) {
+    /* .forecast-card .card-item:not(:last-child) {
         margin-block-end: 16px;
-    }
+    } */
 
     .highlight-list {
         grid-template-columns: 1fr 1fr;
