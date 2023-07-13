@@ -47,189 +47,63 @@ export const updateWeather = function (lat, lon) {
             visibility,
             timezone
         } = currentWeather
+
         const [{ description, icon }] = weather;
 
         const cardCurrentWeather = document.createElement('div');
         cardCurrentWeather.classList.add('card', 'card-lg', 'current-weather-card');
 
         cardCurrentWeather.innerHTML = `
+            <li class="flex items-center">
+                <span class="m-icon">location_on</span>
+                <p class="title-3 meta-text" data-location></p>
+            </li>
+            
+            <div>
 
-        <li class="flex items-center">
-            <span class="m-icon">location_on</span>
-            <p class="title-3 meta-text" data-location></p>
-        </li>
-        
-        <div>
+                <img src="assets/images/weather_icons/${icon}.svg" width="64" height="64" alt="${description}" class="weather-icon">
 
-            <img src="assets/images/weather_icons/${icon}.svg" width="64" height="64" alt="${description}" class="weather-icon">
+                <p class="title-3">${module.getDate(dateUnix, timezone)}</p>
 
-            <p class="title-3">${module.getDate(dateUnix, timezone)}</p>
+                <p class="heading">${parseInt(temp)}&deg;<sup>c</sup></p>
 
-            <p class="heading">${parseInt(temp)}&deg;<sup>c</sup></p>
+                <p class="body-3">${description}</p>
+            
+                <div class="details">
 
-            <p class="body-3">${description}</p>
-        
-            <div class="details">
-                <div class="details-weather">
-                    <div>
-                        <span class="m-icon">water_drop</span>
+                    <div class="details-weather">
+                        <div>
+                            <span class="m-icon">water_drop</span>
                         </div>
-                    <div>
-                        <h3>Humidity</h3>
-                        <p>${humidity}<sup>%</sup></p>
+                        <div>
+                            <h3>Humidity</h3>
+                            <p>${humidity}<sup>%</sup></p>
+                        </div>
                     </div>
+                    
+                    <div class="details-weather">
+                        <div>
+                            <span class="m-icon">thermostat</span>
+                        </div>
+                        <div>
+                            <h3>Feels Like</h3>
+                            <p>${parseInt(feels_like)}&deg;<sup>c</sup></p>
+                        </div>
+                    </div>
+
                 </div>
-                
-                <div class="details-weather">
-                    <div>
-                        <span class="m-icon">thermostat</span>
-                    </div>
-                    <div>
-                        <h3>Feels Like</h3>
-                        <p>${parseInt(feels_like)}&deg;<sup>c</sup></p>
-                    </div>
-                </div>
+
             </div>
-        </div>
 
         `;
 
         fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
-            cardCurrentWeather.querySelector('[data-location]').innerHTML = `
-            ${name}, ${country}`;
+            cardCurrentWeather.querySelector('[data-location]').innerHTML = `${name}, ${country}`;
         });
 
         currentWeatherSection.appendChild(cardCurrentWeather);
 
-
-
-        // Today's highlights
-        fetchData(url.airPollution(lat, lon), function (airPollution) {
-
-            const [{
-                main: { aqi },
-                components: { no2, o3, so2, pm2_5, pm10, nh3 }
-            }] = airPollution.list;
-
-
-            const cardHighlights = document.createElement('div');
-            cardHighlights.classList.add('card-lg', 'px-0', 'ml-5');
-
-            cardHighlights.innerHTML = `
-            <div class="highlight-list">
-
-                <div class="card card-sm highlight-card one">
-
-                    <h3 class="title-3">
-                        Air Quality Index
-                    </h3>
-                    <div class="aqi-content">
-                        <div class="aqi-${aqi}">
-                            <span class="m-icon"> air </span>
-                        </div>
-                        <div class="aqi-info">
-                            <p class="title-3 aqi-${aqi}"> ${module.aqiText[aqi].level} </sub>
-                            <p class="aqi-message aqi-${aqi}"> ${module.aqiText[aqi].message} </sub>
-                        </div>
-                    </div>
-
-                    </span>
-
-                    <div class="wrapper">
-
-                        <ul class="card-list aqi aqi-${aqi}">
-                       
-                        <li class="card-item ${module.getPollutantClass(pm2_5, 25)}">
-                          <p class="title-3">PM<sub>2.5</sub></p>
-                          <p class="pollutant-value">${pm2_5}</p>
-                        </li>
-                        <li class="card-item ${module.getPollutantClass(so2, 10)}">
-                          <p class="title-3">SO<sub>2</sub></p>
-                          <p class="pollutant-value">${so2}</p>
-                        </li>
-                        <li class="card-item ${module.getPollutantClass(no2, 20)}">
-                          <p class="title-3">NO<sub>2</sub></p>
-                          <p class="pollutant-value">${no2}</p>
-                        </li>
-                        <li class="card-item ${module.getPollutantClass(o3, 50)}">
-                          <p class="title-3">O<sub>3</sub></p>
-                          <p class="pollutant-value">${o3}</p>
-                        </li>
-                        <li class="card-item ${module.getPollutantClass(pm10, 50)}">
-                          <p class="title-3">PM<sub>10</sub></p>
-                          <p class="pollutant-value">${pm10}</p>
-                        </li>
-                        <li class="card-item ${module.getPollutantClass(nh3, 10)}">
-                          <p class="title-3">NH<sub>3</sub></p>
-                          <p class="pollutant-value">${nh3}</p>
-                        </li>
-                      
-                        </ul>
-
-                    </div>
-
-                    
-                </div>
-
-                <div class="highlight-card">
-
-                <div class="sunrise card card-sm">
-                    <h3 class="title-3"> Sunrise & Sunset </h3>
-                
-                    <div class="card-list">
-                        <div class="card-item">
-                            <div>
-                                <img src="./assets/images/weather_icons/01d.svg" alt="sunrise">
-                            </div>
-                            <div>
-                                <p class="body-3">Sunrise</p>
-                                <p class="title-2">${module.getTime(sunriseUnixUTC, timezone)}</p>
-                            </div>
-                        </div>
-                
-                        <div class="card-item">
-                            <div>
-                                <img src="./assets/images/weather_icons/01n.svg" alt="sunset">
-                            </div>
-                            <div>
-                                <p class="body-3">Sunset</p>
-                                <p class="title-2">${module.getTime(sunsetUnixUTC, timezone)}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="highlight-card two">
-                    <div class="card card-sm">
-                        <h3 class="title-3">Pressures</h3>
-                        <div class="wrapper">
-                            <span class="m-icon">airwave</span>
-                            <p class="title-1">${pressure}<sup>hPa</sup></p>
-                        </div>
-                    </div>
-                
-                    <div class="card card-sm">
-                        <h3 class="title-3">Visibility</h3>
-                        <div class="wrapper">
-                            <span class="m-icon">Visibility</span>
-                            <p class="title-1">${visibility / 1000}<sup>km</sup></p>
-                        </div>
-                    </div>
-                </div>
-            
-            </div>
-
-
-            </div>
-            `;
-
-            highlightSection.appendChild(cardHighlights);
-
-        });
-
-
-
-        // 24h Forecast section
+        // 5 Days
         fetchData(url.forecast(lat, lon), function (forecast) {
 
             const {
@@ -237,10 +111,8 @@ export const updateWeather = function (lat, lon) {
                 city: { timezone }
             } = forecast;
 
-            // 5 Day forecast
 
             forecastSection.innerHTML = `
-                
                 <div class="forecast-card">
                     <ul data-forecast-list>
                     </ul>
@@ -262,6 +134,7 @@ export const updateWeather = function (lat, lon) {
                 const date = new Date(dt_txt);
 
                 const li = document.createElement('li');
+                
                 li.classList.add('card-item');
 
                 li.innerHTML = `
@@ -304,9 +177,117 @@ export const updateWeather = function (lat, lon) {
 
         });
 
-    })
+        // Today's highlights
+        // Section Graphs
+        chartWeather(lat, lon);
 
-    chartWeather(lat, lon);
+        fetchData(url.airPollution(lat, lon), function (airPollution) {
+            const [{
+                main: { aqi },
+                components: { no2, o3, so2, pm2_5, pm10, nh3 }
+            }] = airPollution.list;
+    
+            const cardHighlights = document.createElement('div');
+            cardHighlights.classList.add('card-lg', 'px-0', 'ml-5');
+    
+            const aqiLevelText = module.aqiText[aqi].level;
+            const aqiMessageText = module.aqiText[aqi].message;
+    
+            const aqiContent = `
+                <div class="aqi-content">
+                    <div class="aqi-${aqi}">
+                        <span class="m-icon"> air </span>
+                    </div>
+                    <div class="aqi-info">
+                        <p class="title-3 aqi-${aqi}">${aqiLevelText}</p>
+                        <p class="aqi-message aqi-${aqi}">${aqiMessageText}</p>
+                    </div>
+                </div>
+            `;
+    
+            const pollutantItems = [
+                { name: 'PM<sub>2.5</sub>', value: pm2_5, threshold: 25 },
+                { name: 'SO<sub>2</sub>', value: so2, threshold: 10 },
+                { name: 'NO<sub>2</sub>', value: no2, threshold: 20 },
+                { name: 'O<sub>3</sub>', value: o3, threshold: 50 },
+                { name: 'PM<sub>10</sub>', value: pm10, threshold: 50 },
+                { name: 'NH<sub>3</sub>', value: nh3, threshold: 10 }
+            ];
+    
+            const pollutantItemsHtml = pollutantItems.map(item => `
+                <li class="card-item ${module.getPollutantClass(item.value, item.threshold)}">
+                    <p class="title-3">${item.name}</p>
+                    <p class="pollutant-value">${item.value}</p>
+                </li>
+            `).join('');
+    
+            const airPollutionHtml = `
+                <div class="highlight-list">
+
+                    <div class="card card-sm highlight-card one">
+
+                        <h3 class="title-3">
+                            Air Quality Index
+                        </h3>
+
+                        ${aqiContent}
+
+                        <div class="wrapper">
+                            <ul class="card-list aqi aqi-${aqi}">
+                                ${pollutantItemsHtml}
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="highlight-card">
+                        <div class="sunrise card card-sm">
+                            <h3 class="title-3">Sunrise & Sunset</h3>
+                            <div class="card-list">
+                                <div class="card-item">
+                                    <div>
+                                        <img src="./assets/images/weather_icons/01d.svg" alt="sunrise">
+                                    </div>
+                                    <div>
+                                        <p class="body-3">Sunrise</p>
+                                        <p class="title-2">${module.getTime(sunriseUnixUTC, timezone)}</p>
+                                    </div>
+                                </div>
+                                <div class="card-item">
+                                    <div>
+                                        <img src="./assets/images/weather_icons/01n.svg" alt="sunset">
+                                    </div>
+                                    <div>
+                                        <p class="body-3">Sunset</p>
+                                        <p class="title-2">${module.getTime(sunsetUnixUTC, timezone)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="highlight-card two">
+                            <div class="card card-sm">
+                                <h3 class="title-3">Pressures</h3>
+                                <div class="wrapper">
+                                    <span class="m-icon">airwave</span>
+                                    <p class="title-1">${pressure}<sup>hPa</sup></p>
+                                </div>
+                            </div>
+                            <div class="card card-sm">
+                                <h3 class="title-3">Visibility</h3>
+                                <div class="wrapper">
+                                    <span class="m-icon">Visibility</span>
+                                    <p class="title-1">${visibility / 1000}<sup>km</sup></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+    
+            cardHighlights.innerHTML = airPollutionHtml;
+            highlightSection.appendChild(cardHighlights);
+        });
+    })
 }
 
 export const error404 = () => errorContent.style.display = 'flex';
