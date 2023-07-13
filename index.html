@@ -101,13 +101,19 @@
                 <section class="section forecast" aria-labelledby="forecast-label" data-5-day-forecast>
                 </section>
 
-                <h2 class="title-2">Today at</h2>
+                <h2 class="body-2 p-5">Today's highlights</h2>
 
-                <div class="m-auto w-1/2 py-5">
-                    <canvas id="weatherChart"></canvas>
-                </div>
-
-                <section class="section hourly-forecast" aria-label="hourly forecast" data-hourly-forecast>
+                <section class="graphs p-5 ml-5">
+                    <div class="m-auto w-full flex justify-between gap-2">
+                        <div class="graph-temp w-1/2 px-5">
+                            <h3 class="title-3 pt-5">Temp. graph</h3>
+                            <canvas id="weatherChart"></canvas>
+                        </div>
+                        <div class="graph-wind w-1/2 px-5">
+                            <h3 class="title-3 pt-5">Wind graph</h3>
+                            <canvas id="windChart"></canvas>
+                        </div>
+                    </div>
                 </section>
 
                 <section class="section highlights" aria-labelledby="highlights-label" data-highlights>
@@ -138,7 +144,8 @@
 
     <footer>
         <p class="body-3">
-            Copyright 2023 codewithsadee. All Rights Reserved.
+            Copyright 2023. 
+            All Rights Reserved.
         </p>
         <p class="body-3">
             Powered By
@@ -154,5 +161,4 @@
 
 
 
-
-
+<img src="./assets/images/weather_icons/01d.svg" alt="sunset">

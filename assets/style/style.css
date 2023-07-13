@@ -8,16 +8,24 @@
     --on-surface-variant: #353535;
     --on-surface-variant-2: #474747;
     --outline: #cac9c9;
-    --bg-aqi-1: #89E589;
-    --on-bg-aqi-1: #1F331F;
-    --bg-aqi-2: #E5DD89;
-    --on-bg-aqi-2: #33311F;
-    --bg-aqi-3: #E5C089;
-    --on-bg-aqi-3: #332B1F;
-    --bg-aqi-4: #E58989;
-    --on-bg-aqi-4: #331F1F;
-    --bg-aqi-5: #E589B7;
-    --on-bg-aqi-5: #331F29;
+
+    --aqi-1: rgba(137, 229, 137, 0.2);
+    --aqi-1-text: #4da545;
+
+    --aqi-2: rgb(229, 221, 137, 0.2);
+    --aqi-2-text: #7e541e;
+
+
+    --aqi-3: rgba(248, 178, 73, 0.2);
+    --aqi-3-text: #bb6707;
+
+    --aqi-4: rgb(229, 137, 137, 0.2);
+    --aqi-4-text: #331F1F;
+
+    --aqi-5: rgba(229, 137, 142, 0.2);
+    --aqi-5-text: #5e0c10;
+
+
     --white: #000000;
     --white-alpha-4: hsla(0, 0%, 100%, 0.04);
     --white-alpha-8: hsla(0, 0%, 100%, 0.08);
@@ -98,7 +106,7 @@ body {
 }
 
 
-.card {
+.card, .graphs {
     background: #ffffffda;
     /* box-shadow: 0 8px 10px 0 rgba(90, 90, 90, 0.103); */
     backdrop-filter: blur(13.5px);
@@ -134,7 +142,6 @@ body {
 
 .title-2 {
     font-size: var(--title-2);
-    margin-block-end: 12px;
 }
 
 .title-3 {

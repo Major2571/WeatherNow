@@ -9,7 +9,7 @@
 
 .highlight-list .title-3 {
     color: var(--on-surface-variant);
-    margin-block-end: 20px;
+
 }
 
 .highlights .card-sm {
@@ -17,9 +17,10 @@
     position: relative;
 }
 
-.highlight-card :is(.wrapper, .card-list, .card-item) {
+.highlight-card :is(.wrapper, .card-list) {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .highlight-card .wrapper {
@@ -30,52 +31,103 @@
 .highlight-card .card-list {
     flex-wrap: wrap;
     flex-grow: 1;
-    row-gap: 8px;
+    row-gap: 1em;
 }
 
 .highlight-card .card-item {
-    width: 50%;
-    justify-content: flex-end;
+    width: 40%;
+    justify-content: space-evenly;
     gap: 4px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.highlight-card .card-item img {
+    width: 3.5em;
 }
 
 .highlight-card .label-1 {
     color: var(--on-surface-variant)
 }
 
-.badge {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    padding: 2px 12px;
-    border-radius: var(--radius-pill);
-    font-weight: var(--weight-semiBold);
-    cursor: help;
+/* Air Quality Index */
+.aqi-content {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    gap: 1em;
+    justify-content: space-between;
 }
 
-.badge.aqi-1 {
-    background-color: var(--bg-aqi-1);
-    color: var(--on-bg-aqi-1)
+.aqi .card-item {
+    border-radius: 10px;
+    padding: 1em 10px;
+    font-size: 1.5em;
+    font-weight: 600;
 }
 
-.badge.aqi-2 {
-    background-color: var(--bg-aqi-2);
-    color: var(--on-bg-aqi-2)
+.aqi .card-item .title-3 {
+    font-size: 16px;
 }
 
-.badge.aqi-3 {
-    background-color: var(--bg-aqi-3);
-    color: var(--on-bg-aqi-3)
+.aqi-message {
+    color: #999999;
 }
 
-.badge.aqi-4 {
-    background-color: var(--bg-aqi-4);
-    color: var(--on-bg-aqi-4)
+.aqi-content .aqi-1 span,
+.title-3.aqi-1,
+.card-item.aqi-1 .title-3 {
+    color: var(--aqi-1-text);
 }
 
-.badge.aqi-5 {
-    background-color: var(--bg-aqi-5);
-    color: var(--on-bg-aqi-5)
+.card-item.aqi-1 {
+    background-color: var(--aqi-1);
+    color: var(--aqi-1-text);
+}
+
+.aqi-content .aqi-2 span,
+.title-3.aqi-2,
+.card-item.aqi-2 .title-3 {
+    color: var(--aqi-2-text);
+}
+
+.card-item.aqi-2 {
+    background-color: var(--aqi-2);
+    color: var(--aqi-2-text);
+}
+
+.aqi-content .aqi-3 span,
+.title-3.aqi-3,
+.card-item.aqi-3 .title-3 {
+    color: var(--aqi-3-text);
+}
+
+.card-item.aqi-3 {
+    background-color: var(--aqi-3);
+    color: var(--aqi-3-text);
+}
+
+.aqi-content .aqi-4 span,
+.title-3.aqi-4,
+.card-item.aqi-4 .title-3 {
+    color: var(--aqi-4-text);
+}
+
+.card-item.aqi-4 {
+    background-color: var(--aqi-4);
+    color: var(--aqi-4-text);
+}
+
+.aqi-content .aqi-5 span,
+.title-3.aqi-5,
+.card-item.aqi-5 .title-3 {
+    color: var(--aqi-5-text);
+}
+
+.card-item.aqi-5 {
+    background-color: var(--aqi-5);
+    color: var(--aqi-5-text);
 }
 
 
@@ -87,6 +139,13 @@
 
 .highlight-card.two .label-1 {
     margin-block-end: 4px;
+}
+
+.highlight-card.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+    gap: 10px;
 }
 
 

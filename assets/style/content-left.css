@@ -78,13 +78,14 @@
     align-items: stretch;
 }
 
-.card-item{
+.forecast-card .card-item {
     background-color: rgb(255, 255, 255);
     border: 1px solid #71a5e934;
     padding: 1.2em;
     min-width: 270px;
     border-radius: 10px;
 }
+
 
 .card-item .body-3 {
     font-size: 1em;

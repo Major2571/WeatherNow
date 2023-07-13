@@ -15,12 +15,10 @@ export const updateWeather = function (lat, lon) {
 
     const currentWeatherSection = document.querySelector('[data-current-weather]');
     const highlightSection = document.querySelector('[data-highlights]');
-    const hourlySection = document.querySelector('[data-hourly-forecast]');
     const forecastSection = document.querySelector('[data-5-day-forecast]');
 
     currentWeatherSection.innerHTML = "";
     highlightSection.innerHTML = "";
-    hourlySection.innerHTML = "";
     forecastSection.innerHTML = "";
 
     if (window.location.hash === '#/current-location') {
@@ -73,7 +71,7 @@ export const updateWeather = function (lat, lon) {
             <div class="details">
                 <div class="details-weather">
                     <div>
-                        <span class="m-icon">humidity_percentage</span>
+                        <span class="m-icon">water_drop</span>
                         </div>
                     <div>
                         <h3>Humidity</h3>
@@ -109,16 +107,16 @@ export const updateWeather = function (lat, lon) {
 
             const [{
                 main: { aqi },
-                components: { no2, o3, so2, pm2_5 }
+                components: { no2, o3, so2, pm2_5, pm10, nh3 }
             }] = airPollution.list;
 
+
+
+
             const cardHighlights = document.createElement('div');
-            cardHighlights.classList.add('card-lg', 'pt-0');
+            cardHighlights.classList.add('card-lg', 'px-0', 'ml-5');
 
             cardHighlights.innerHTML = `
-            <h2 class="title-2" id="highlights-label">
-            Today's Highlights
-            </h2>
             <div class="highlight-list">
 
                 <div class="card card-sm highlight-card one">
@@ -126,97 +124,103 @@ export const updateWeather = function (lat, lon) {
                     <h3 class="title-3">
                         Air Quality Index
                     </h3>
+                    <div class="aqi-content">
+                        <div class="aqi-${aqi}">
+                            <span class="m-icon"> air </span>
+                        </div>
+                        <div class="aqi-info">
+                            <p class="title-3 aqi-${aqi}"> ${module.aqiText[aqi].level} </sub>
+                            <p class="aqi-message aqi-${aqi}"> ${module.aqiText[aqi].message} </sub>
+                        </div>
+                    </div>
+
+                    </span>
 
                     <div class="wrapper">
-                        <span class="m-icon"> air </span>
 
-                        <ul class="card-list">
-                            <li class="card-item">
-                                <p class="title-1">${pm2_5.toPrecision(3)}</p>
-                                <p class="label-1">PM<sub>2.5</sub>
-                                </p>
-                            </li>
-                            <li class="card-item">
-                                <p class="title-1">${so2.toPrecision(3)}</p>
-                                <p class="label-1">SO<sub>2</sub>
-                                </p>
-                            </li>
-                            <li class="card-item">
-                                <p class="title-1">${no2.toPrecision(3)}</p>
-                                <p class="label-1">NO<sub>2</sub>
-                                </p>
-                            </li>
-                            <li class="card-item">
-                                <p class="title-1">${o3.toPrecision(3)}</p>
-                                <p class="label-1">O<sub>3</sub>
-                                </p>
-                            </li>
+                        <ul class="card-list aqi aqi-${aqi}">
+                       
+                        <li class="card-item ${module.getPollutantClass(pm2_5, 25)}">
+                          <p class="title-3">PM<sub>2.5</sub></p>
+                          <p class="pollutant-value">${pm2_5}</p>
+                        </li>
+                        <li class="card-item ${module.getPollutantClass(so2, 10)}">
+                          <p class="title-3">SO<sub>2</sub></p>
+                          <p class="pollutant-value">${so2}</p>
+                        </li>
+                        <li class="card-item ${module.getPollutantClass(no2, 20)}">
+                          <p class="title-3">NO<sub>2</sub></p>
+                          <p class="pollutant-value">${no2}</p>
+                        </li>
+                        <li class="card-item ${module.getPollutantClass(o3, 50)}">
+                          <p class="title-3">O<sub>3</sub></p>
+                          <p class="pollutant-value">${o3}</p>
+                        </li>
+                        <li class="card-item ${module.getPollutantClass(pm10, 50)}">
+                          <p class="title-3">PM<sub>10</sub></p>
+                          <p class="pollutant-value">${pm10}</p>
+                        </li>
+                        <li class="card-item ${module.getPollutantClass(nh3, 10)}">
+                          <p class="title-3">NH<sub>3</sub></p>
+                          <p class="pollutant-value">${nh3}</p>
+                        </li>
+                      
                         </ul>
 
                     </div>
 
-                    <span class="badge aqi-${aqi}" title="${module.aqiText[aqi].message}">
-                        ${module.aqiText[aqi].level}
-                    </span>
+                    
                 </div>
 
-                <div class="card card-sm highlight-card two">
+                <div class="highlight-card">
 
+                <div class="sunrise card card-sm">
                     <h3 class="title-3"> Sunrise & Sunset </h3>
-
+                
                     <div class="card-list">
-
                         <div class="card-item">
-                            <span class="m-icon">clear_day</span>
                             <div>
-                                <p class="label-1">Sunrise</p>
-                                <p class="title-1">${module.getTime(sunriseUnixUTC, timezone)}</p>
+                                <img src="./assets/images/weather_icons/01d.svg" alt="sunrise">
+                            </div>
+                            <div>
+                                <p class="body-3">Sunrise</p>
+                                <p class="title-2">${module.getTime(sunriseUnixUTC, timezone)}</p>
                             </div>
                         </div>
-
+                
                         <div class="card-item">
-                            <span class="m-icon">clear_night</span>
                             <div>
-                                <p class="label-1">Sunset</p>
-                                <p class="title-1">${module.getTime(sunsetUnixUTC, timezone)}</p>
+                                <img src="./assets/images/weather_icons/01n.svg" alt="sunset">
+                            </div>
+                            <div>
+                                <p class="body-3">Sunset</p>
+                                <p class="title-2">${module.getTime(sunsetUnixUTC, timezone)}</p>
                             </div>
                         </div>
-
-                    </div>
-
-                </div>
-
-                <div class="card card-sm highlight-card">
-                    <h3 class="title-3">Humidity</h3>
-                    <div class="wrapper">
-                        <span class="m-icon">humidity_percentage</span>
-                        <p class="title-1">${humidity}<sup>%</sup></p>
                     </div>
                 </div>
-
-                <div class="card card-sm highlight-card">
-                    <h3 class="title-3">Pressures</h3>
-                    <div class="wrapper">
-                        <span class="m-icon">airwave</span>
-                        <p class="title-1">${pressure}<sup>hPa</sup></p>
+            
+                <div class="highlight-card two">
+                    <div class="card card-sm">
+                        <h3 class="title-3">Pressures</h3>
+                        <div class="wrapper">
+                            <span class="m-icon">airwave</span>
+                            <p class="title-1">${pressure}<sup>hPa</sup></p>
+                        </div>
+                    </div>
+                
+                    <div class="card card-sm">
+                        <h3 class="title-3">Visibility</h3>
+                        <div class="wrapper">
+                            <span class="m-icon">Visibility</span>
+                            <p class="title-1">${visibility / 1000}<sup>km</sup></p>
+                        </div>
                     </div>
                 </div>
+            
+            </div>
 
-                <div class="card card-sm highlight-card">
-                    <h3 class="title-3">Visibility</h3>
-                    <div class="wrapper">
-                        <span class="m-icon">Visibility</span>
-                        <p class="title-1">${visibility / 1000}<sup>km</sup></p>
-                    </div>
-                </div>
 
-                <div class="card card-sm highlight-card">
-                    <h3 class="title-3">Feels Like</h3>
-                    <div class="wrapper">
-                        <span class="m-icon">thermostat</span>
-                        <p class="title-1">${parseInt(feels_like)}&deg;<sup>c</sup></p>
-                    </div>
-                </div>
             </div>
             `;
 
@@ -233,71 +237,6 @@ export const updateWeather = function (lat, lon) {
                 list: forecastList,
                 city: { timezone }
             } = forecast;
-
-            hourlySection.innerHTML = `
-            <div class="card-lg">
-            <h2 class="title-2">Today at</h2>
-
-            <div class="slider-container">
-
-                <ul class="slider-list" data-temp></ul>
-
-                <ul class="slider-list" data-wind></ul>
-
-            </div>
-            </div>
-            `;
-
-            for (const [index, data] of forecastList.entries()) {
-                if (index > 7) break;
-
-                const {
-                    dt: dateTimeUnix,
-                    main: { temp },
-                    weather,
-                    wind: {
-                        deg: windDirection,
-                        speed: windSpeed
-                    }
-                } = data;
-
-                const [{ icon, description }] = weather;
-
-                // Temp
-                const tempLi = document.createElement('li');
-                tempLi.classList.add('slider-item');
-
-                tempLi.innerHTML = `
-                    <div class="card card-sm slider-card">
-                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
-                        <img src="./assets/images/weather_icons/${icon}.svg" width="48" height="48" alt="${description}"
-                            loading="lazy" class="weather-icon" title="${description}">
-                        <p class="body-3">${parseInt(temp)}&deg;</p>
-                    </div>
-                `;
-
-                hourlySection.querySelector('[data-temp]').appendChild(tempLi);
-
-                // Wind 
-                const windLi = document.createElement('li');
-                windLi.classList.add('slider-item');
-
-                windLi.innerHTML = `
-                    <div class="card card-sm slider-card">
-
-                        <p class="body-3">${module.getHours(dateTimeUnix, timezone)}</p>
-
-                        <img src="./assets/images/weather_icons/direction.png" width="48" height="48" alt="direction"
-                            loading="lazy" class="weather-icon" style="transform: rotate(${windDirection - 180}deg)" >
-                        <p class="body-3">${parseInt(module.mps_to_kmh(windSpeed))} km/h</p>
-
-                    </div>
-                `;
-
-                hourlySection.querySelector('[data-wind]').appendChild(windLi);
-
-            }
-
 
             // 5 Day forecast
 
@@ -341,7 +280,7 @@ export const updateWeather = function (lat, lon) {
                         <div class="flex justify-between items-center content-center">
                             <div>
                                 <div class="flex items-center">
-                                    <span class="m-icon">humidity_percentage</span>
+                                    <span class="m-icon">water_drop</span>
                                     <p class="forecast-info">${humidity}<sup>%</sup></p>
                                 </div>
                                 <div class="flex items-center">
@@ -377,7 +316,7 @@ export const updateWeather = function (lat, lon) {
             const temperatures = [];
             const icons = [];
 
-            forecastList.slice(0, 8).forEach((data) => {
+            forecastList.slice(0, 6).forEach((data) => {
                 const {
                     dt: dateTimeUnix,
                     main: { temp },
@@ -392,13 +331,15 @@ export const updateWeather = function (lat, lon) {
                 icons.push(icon);
             });
 
-            const chartElement = document.getElementById('weatherChart').getContext("2d");
+            const temperatureChartElement = document.getElementById('weatherChart').getContext("2d");
 
-            var gradientFill = chartElement.createLinearGradient(0, 0, 0, 200);
-            gradientFill.addColorStop(0, "#C1D7F5");
+            let gradientFill = temperatureChartElement.createLinearGradient(0, 0, 0, 300);
+            gradientFill.addColorStop(0, "#f1dcc0");
             gradientFill.addColorStop(1, "#F5F8FD");
 
-            const weatherChart = new Chart(chartElement, {
+            temperatureChartElement.canvas.style.height = "400px";
+
+            const weatherChart = new Chart(temperatureChartElement, {
                 type: 'line',
                 data: {
                     labels: labels,
@@ -406,9 +347,9 @@ export const updateWeather = function (lat, lon) {
                         {
                             label: 'Temperature',
                             data: temperatures,
-                            borderColor: '#6da2e8',
+                            borderColor: '#eaaf6d',
                             backgroundColor: gradientFill,
-                            pointRadius: 0,
+                            pointRadius: 3,
                             lineTension: 0.3,
                             borderWidth: 2,
                             fill: true,
@@ -435,8 +376,11 @@ export const updateWeather = function (lat, lon) {
                         y: {
                             display: false,
                             suggestedMin: Math.min(...temperatures) - 3,
-                            suggestedMax: Math.max(...temperatures) + 3,
+                            suggestedMax: Math.max(...temperatures) + 4,
                             grid: {
+                                display: true,
+                            },
+                            ticks: {
                                 display: false,
                             },
                         },
@@ -451,7 +395,7 @@ export const updateWeather = function (lat, lon) {
                                 weight: 'bold',
                             },
                             formatter: function (value) {
-                                return Math.round(value) + '°';
+                                return Math.round(value) + '°C';
                             },
                         },
                     },
@@ -459,6 +403,102 @@ export const updateWeather = function (lat, lon) {
                 plugins: [ChartDataLabels],
             });
         });
+
+
+        fetchData(url.forecast(lat, lon), function (forecast) {
+            const {
+                list: forecastList,
+                city: { timezone },
+            } = forecast;
+
+            const windData = [];
+
+            for (const [index, data] of forecastList.entries()) {
+                if (index > 5) break;
+
+                const {
+                    dt: dateTimeUnix,
+                    wind: { deg: windDirection, speed: windSpeed },
+                } = data;
+
+                const windSpeedKmh = parseInt(module.mps_to_kmh(windSpeed));
+
+                windData.push({ dateTime: module.getHours(dateTimeUnix, timezone), windSpeedKmh });
+            }
+
+            const windInfo = windData.map((data) => data.windSpeedKmh);
+
+            const windChartCanvas = document.getElementById('windChart').getContext("2d");
+
+            let gradientFillWind = windChartCanvas.createLinearGradient(0, 0, 0, 300);
+            gradientFillWind.addColorStop(0, "#C1D7F5");
+            gradientFillWind.addColorStop(1, "#F5F8FD");
+
+
+            const windChart = new Chart(windChartCanvas, {
+                type: 'line',
+                data: {
+                    labels: windData.map((data) => data.dateTime),
+                    datasets: [
+                        {
+                            label: 'Wind Speed (km/h)',
+                            data: windInfo,
+                            borderColor: '#6da2e8',
+                            backgroundColor: gradientFillWind,
+                            pointRadius: 3,
+                            lineTension: 0.3,
+                            borderWidth: 2,
+                            fill: true,
+                        },
+                    ],
+                },
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                            },
+                            grid: {
+                                display: false,
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold',
+                                },
+                            },
+                        },
+                        y: {
+                            display: false,
+                            suggestedMin: Math.min(...windInfo) - 3,
+                            suggestedMax: Math.max(...windInfo) + 5,
+                            grid: {
+                                display: true,
+                            },
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        datalabels: {
+                            align: 'top',
+                            color: 'black',
+                            font: {
+                                size: 12,
+                                weight: 'bold',
+                            },
+                            formatter: function (value) {
+                                return value + ' km/h';
+                            },
+                        },
+                    },
+                },
+                plugins: [ChartDataLabels],
+            });
+        });
+
 
 
 

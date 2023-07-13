@@ -86,9 +86,8 @@
     }
 
     .highlight-card.one .card-item {
-        width: 25%;
+        width: 15%;
         flex-direction: column-reverse;
-        gap: 8px;
     }
 
     .slider-container {
