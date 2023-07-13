@@ -54,31 +54,45 @@ export const updateWeather = function (lat, lon) {
         cardCurrentWeather.classList.add('card', 'card-lg', 'current-weather-card');
 
         cardCurrentWeather.innerHTML = `
-            <h2 class="title-2 card-title">Now</h2>
 
-            <div class="weapper">
-                <p class="heading">${parseInt(temp)}&deg;<sup>c</sup></p>
-                <img src="assets/images/weather_icons/${icon}.svg" width="64" height="64" alt="${description}"
-                    class="weather-icon">
-            </div>
+        <li class="flex items-center">
+            <span class="m-icon">location_on</span>
+            <p class="title-3 meta-text" data-location></p>
+        </li>
+        
+        <div>
+
+            <img src="assets/images/weather_icons/${icon}.svg" width="64" height="64" alt="${description}" class="weather-icon">
+
+            <p class="title-3">${module.getDate(dateUnix, timezone)}</p>
+
+            <p class="heading">${parseInt(temp)}&deg;<sup>c</sup></p>
 
             <p class="body-3">${description}</p>
-
-            <ul class="meta-list">
-                <li class="meta-item">
-                    <span class="m-icon">location_on</span>
-                    <p class="title-3 meta-text" data-location></p>
-                </li> 
-                <li class="meta-item">
-                    <span class="m-icon">calendar_today</span>
-                    <p class="title-3 meta-text">${module.getDate(dateUnix, timezone)}</p>
-                </li>
-                <li class="meta-item">
-                    <span class="m-icon">schedule</span>
-                    <p class="title-3 meta-text">${module.getTime(dateUnix, timezone)}</p>
-                </li>
+        
+            <div class="details">
+                <div class="details-weather">
+                    <div>
+                        <span class="m-icon">humidity_percentage</span>
+                        </div>
+                    <div>
+                        <h3>Humidity</h3>
+                        <p>${humidity}<sup>%</sup></p>
+                    </div>
+                </div>
                 
-            </ul>
+                <div class="details-weather">
+                    <div>
+                        <span class="m-icon">thermostat</span>
+                    </div>
+                    <div>
+                        <h3>Feels Like</h3>
+                        <p>${parseInt(feels_like)}&deg;<sup>c</sup></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         `;
 
         fetchData(url.reverseGeo(lat, lon), function ([{ name, country }]) {
@@ -352,8 +366,6 @@ export const updateWeather = function (lat, lon) {
 
         });
 
-
-        // 24h Forecast section
         // 24h Forecast section
         fetchData(url.forecast(lat, lon), function (forecast) {
             const {

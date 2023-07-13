@@ -236,9 +236,6 @@
         gap: 2em;
     }
 
-    .current-weather .weather-icon {
-        width: 80px;
-    }
 
     .forecast-card .title-2 {
         --title-2: 2em;

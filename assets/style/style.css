@@ -104,8 +104,13 @@ body {
     backdrop-filter: blur(13.5px);
     -webkit-backdrop-filter: blur(13.5px);
     border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.658);
+    border: 1px solid #71a5e934;
     color: var(--on-surface);
+}
+
+.current-weather .weather-icon {
+    width: 7em;
+    margin: 1em auto;
 }
 
 .card-lg {
@@ -121,7 +126,6 @@ body {
 .heading {
     color: var(--white);
     font-size: var(--heading);
-    line-height: 1.1;
 }
 
 .title-1 {
@@ -277,6 +281,7 @@ footer .body-3:last-child {
     border-radius: var(--radius-circle);
     animation: loading 500ms linear infinite;
 }
+
 
 
 
