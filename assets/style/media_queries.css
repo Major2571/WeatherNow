@@ -93,7 +93,7 @@
     .slider-container {
         margin-inline: 0 -24px;
         border-bottom-left-radius: var(--radius-16);
-        border-top-left-radius: var(--radius 16);
+        border-top-left-radius: var(--radius-16);
     }
 
     .slider-list::before {
@@ -129,7 +129,7 @@
     }
 
     .body-3 {
-        font-size: 1.2em;
+        font-size: 1.2rem;
     }
 
     .highlight-card.two .card-item {
