@@ -77,12 +77,10 @@
                 </a>
             </div>
         </div>
-
-
     </header>
 
-
     <main>
+
         <article class="container" data-container>
 
             <div class="content-left">
@@ -90,10 +88,7 @@
                 <section class="section current-weather" aria-label="current
                 weather" data-current-weather>
                 </section>
-
-
             </div>
-
 
             <div class="content-right">
 
@@ -104,13 +99,13 @@
                 <h2 class="body-2 p-5">Today's highlights</h2>
 
                 <section class="graphs p-5 ml-5">
-                    <div class="m-auto w-full flex justify-between gap-2">
-                        <div class="graph-temp w-1/2 px-5">
-                            <h3 class="title-3 pt-5">Temp. graph</h3>
+                    <div class="m-auto highlight-list">
+                        <div class="graph-temp w-full highlight-card">
+                            <h3 class="title-3 pt-5 ml-5">Temp. graph</h3>
                             <canvas id="weatherChart"></canvas>
                         </div>
-                        <div class="graph-wind w-1/2 px-5">
-                            <h3 class="title-3 pt-5">Wind graph</h3>
+                        <div class="graph-wind w-full highlight-card">
+                            <h3 class="title-3 pt-5 ml-5">Wind graph</h3>
                             <canvas id="windChart"></canvas>
                         </div>
                     </div>
@@ -120,40 +115,45 @@
                 </section>
             </div>
 
-
         </article>
-
 
         <div class="loading" data-loading></div>
     </main>
-
-
 
     <section class="error-content" data-error-content>
         <h2 class="heading">
             404
         </h2>
-        <p class="body-1">
+        <p class="title-3">
             Page not found!
         </p>
-        <a href="#/weather?lat=51.5073219&lon=-0.1276474" class="btn-primary">
-            <span class="span"> Go Home </span>
-        </a>
+        <p class="body-3">Please try again or choose some place:</p>
+        <div class="places">
+            <a href="#/weather?lat=47.4938673&lon=19.0417582" class="bud">
+                Budapest
+            </a>
+            <a href="#/weather?lat=40.7127281&lon=-74.0060152" class="nyc">
+                New York
+            </a>
+            <a href="#/weather?lat=51.5073219&lon=-0.1276474" class="lon">
+                London
+            </a>
+        </div>
     </section>
 
-
     <footer>
-        <p class="body-3">
+        <p class="title-3">
             Copyright 2023.
             All Rights Reserved.
         </p>
-        <p class="body-3">
+        <p class="title-3">
             Powered By
             <a href="https://openweathermap.org/api" title="Free OpenWeather Api" target="_blank" rel="noopener">
                 <img src="./assets/images/openweather.png" width="150" height="30" loading="lazy" alt="OpenWeather">
             </a>
         </p>
     </footer>
+    
 </body>
 
 </html>
