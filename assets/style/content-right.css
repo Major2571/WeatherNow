@@ -7,25 +7,19 @@
     gap: 20px;
 }
 
-.highlight-list .title-3 {
-    color: var(--on-surface-variant);
-
-}
-
-.highlights .card-sm {
-    /* background-color: var(--black-alpha-10); */
-    position: relative;
-}
-
 .highlight-card :is(.wrapper, .card-list) {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
-.highlight-card .wrapper {
-    justify-content: space-between;
-    gap: 1em;
+.highlight-list .title-3 {
+    color: var(--on-surface-variant);
+    padding-bottom: 10px;
+}
+
+.highlight-card .wrapper .m-icon {
+    color: #b3b4b4;
 }
 
 .highlight-card .card-list {
@@ -36,20 +30,26 @@
 
 .highlight-card .card-item {
     width: 40%;
-    justify-content: space-evenly;
-    gap: 4px;
-    margin-top: 10px;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 10px 0;
+    margin-top: 10px;
 }
 
-.highlight-card .card-item img {
+.highlight-card .sunrise .card-item img {
     width: 3.5em;
 }
 
-.highlight-card .label-1 {
-    color: var(--on-surface-variant)
+/* 2 cards */
+.highlight-card.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 1em;
+    gap: 1em;
 }
+
 
 /* Air Quality Index */
 .aqi-content {
@@ -131,60 +131,3 @@
 }
 
 
-.highlight-card.two .card-item {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-}
-
-.highlight-card.two .label-1 {
-    margin-block-end: 4px;
-}
-
-.highlight-card.two {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 10px;
-    gap: 10px;
-}
-
-
-/* Forecast */
-
-.slider-container {
-    overflow-x: auto;
-    margin-inline: -16px;
-}
-
-.slider-container::-webkit-scrollbar {
-    display: none;
-}
-
-.slider-list {
-    display: flex;
-    gap: 12px;
-}
-
-.slider-list:first-child {
-    margin-block-end: 1em;
-}
-
-.slider-list::before,
-.slider-list::after {
-    content: "";
-    min-width: 4px;
-}
-
-.slider-item {
-    min-width: 110px;
-    flex: 1 1 100%;
-}
-
-.slider-card {
-    text-align: center;
-}
-
-.slider-item .weather-icon {
-    margin-inline: auto;
-    margin-block: 12px;
-}

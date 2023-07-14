@@ -69,9 +69,9 @@ export const updateWeather = function (lat, lon) {
 
                 <p class="body-3">${description}</p>
             
-                <div class="details">
+                <div class="current-weather-info">
 
-                    <div class="details-weather">
+                    <div class="current-weather-info-weather">
                         <div>
                             <span class="m-icon">water_drop</span>
                         </div>
@@ -81,7 +81,7 @@ export const updateWeather = function (lat, lon) {
                         </div>
                     </div>
                     
-                    <div class="details-weather">
+                    <div class="current-weather-info-weather">
                         <div>
                             <span class="m-icon">thermostat</span>
                         </div>

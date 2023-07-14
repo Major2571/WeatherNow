@@ -1,0 +1,56 @@
+/* 5 days forecast */
+.forecast {
+    overflow: scroll;
+    margin-inline: -16px;
+    padding: 0 36px;
+    scroll-snap-align: start;
+}
+
+.forecast-card ul {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: stretch;
+}
+
+.forecast-card .card-item {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #71a5e934;
+    padding: 1.2em;
+    min-width: 270px;
+    border-radius: 10px;
+}
+
+.forecast-card .icon-wrapper {
+    display: grid;
+    gap: 1em;
+}
+
+.forecast-card .label-1 {
+    color: var(--on-surface-variant);
+    font-size: 1.5em;
+    font-weight: var(--weight-semiBold);
+}
+
+.card-item .body-3 {
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: rgb(165, 165, 165);
+}
+
+.forecast-card  .icon-wrapper span {
+    margin-block-end: 0;
+    font-size: 2em;
+    color: var(--primary);
+}
+
+.forecast-info {
+    font-size: 1.2em;
+    padding-inline-start: 10px;
+}
+
+.forecast-temp {
+    font-size: 2.3em;
+    font-weight: 600;
+}
