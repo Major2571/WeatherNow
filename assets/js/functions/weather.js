@@ -55,7 +55,7 @@ export const updateWeather = function (lat, lon) {
 
         cardCurrentWeather.innerHTML = `
             <li class="flex items-center">
-                <span class="m-icon">location_on</span>
+                <span class="m-icon mr-3">location_on</span>
                 <p class="title-3 meta-text" data-location></p>
             </li>
             
