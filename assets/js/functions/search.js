@@ -40,8 +40,7 @@ searchField.addEventListener('input', function () {
         searchField.classList.remove('searching');
         searchResult.classList.add('active');
         searchResult.innerHTML = `
-                  <ul class="view-list" data-search-list>
-                  </ul>
+                <ul class="view-list" data-search-list></ul>
               `;
 
         const items = [];
@@ -51,19 +50,19 @@ searchField.addEventListener('input', function () {
           searchItem.classList.add('view-item');
 
           searchItem.innerHTML = `
-                      <span class="m-icon">location_on</span>
+              <span class="m-icon">location_on</span>
 
-                      <div>
-                          <p class="label-2 item-title">
-                              ${name}
-                          </p>
-                          <p class="label-2 item-subtitle">
-                              ${state || ''}, ${country}
-                          </p>
-                      </div>
+              <div>
+                  <p class="label-2 item-title">
+                      ${name}
+                  </p>
+                  <p class="label-2 item-subtitle">
+                      ${state || ''} ${country}
+                  </p>
+              </div>
 
-                      <a href="#/weather?lat=${lat}&lon=${lon}" class="item-link has-state" arial-label="${name} weather" data-search-toggler></a>
-                  `;
+              <a href="#/weather?lat=${lat}&lon=${lon}" class="item-link has-state" arial-label="${name} weather" data-search-toggler></a>
+          `;
 
           searchResult.querySelector('[data-search-list]').appendChild(searchItem);
           items.push(searchItem.querySelector('[data-search-toggler]'));
