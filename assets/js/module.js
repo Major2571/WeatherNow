@@ -66,9 +66,9 @@ export const getTime = function (timeUnix, timezone) {
 export const getHours = function (timeUnix, timezone) {
     const date = new Date((timeUnix + timezone) * 1000);
     const hours = date.getUTCHours();
-    const period = hours >= 10 ? "PM" : "AM";
+    const period = hours >= 10 ? "pm" : "am";
 
-    return `${hours % 12 || 12} ${period}`;
+    return `${hours % 12 || 12}${period}`;
 }
 
 /**
