@@ -11,6 +11,7 @@ export const updateWeather = function (lat, lon) {
 
     loading.style.display = 'grid';
     errorContent.style.display = 'none';
+    container.style.display = '';
     container.style.overflowY = 'hidden';
     container.classList.remove('fade-in');
 
@@ -264,6 +265,7 @@ export const updateWeather = function (lat, lon) {
                                 </div>
                             </div>
                         </div>
+
                         <div class="highlight-card two">
                             <div class="card card-sm">
                                 <h3 class="title-3">Pressures</h3>
@@ -280,6 +282,7 @@ export const updateWeather = function (lat, lon) {
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             `;
@@ -290,4 +293,7 @@ export const updateWeather = function (lat, lon) {
     })
 }
 
-export const error404 = () => errorContent.style.display = 'flex';
+export const error404 = () => {
+    errorContent.style.display = 'flex';
+    container.style.display = 'none';
+};
