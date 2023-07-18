@@ -14,12 +14,12 @@
 }
 
 .highlight-list .title-3 {
-    color: var(--on-surface-variant);
+    color: var(--text-variant);
     padding-bottom: 10px;
 }
 
 .highlight-card .wrapper .m-icon {
-    color: #b3b4b4;
+    color: var(--on-primary);
 }
 
 .highlight-card .card-list {
@@ -63,16 +63,16 @@
 .aqi .card-item {
     border-radius: 10px;
     padding: 1em 10px;
-    font-size: 1.5em;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: var(--weight-semiBold);
 }
 
 .aqi .card-item .title-3 {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .aqi-message {
-    color: #999999;
+    color: var(--on-primary);
 }
 
 .aqi-content .aqi-1 span,
