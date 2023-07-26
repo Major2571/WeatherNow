@@ -19,3 +19,8 @@ A simple webapp to display real-time weather information.
 
 The webapp is deployed on [Vercel](https://vercel.com/). You can access it [here](https://weather-now-rose.vercel.app/).
 
+## Technologies Used
+
+-   HTML, CSS, and JavaScript for the webapp's structure, styling, and interactivity.
+-   [OpenWeather API](https://openweathermap.org/api) to fetch weather data.
+-   [Chart.js](https://www.chartjs.org/) to create interactive charts.
