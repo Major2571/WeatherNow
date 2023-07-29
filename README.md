@@ -5,7 +5,8 @@
 	 </h1>
 </div>
 
-![WeatherNow screenshot](https://github.com/Major2571/WeatherNow/assets/99849455/aba3eb4e-fbeb-419c-9d81-0b1e5fd793f6)
+![WeatherNow screenshot](https://github.com/Major2571/WeatherNow/assets/99849455/5e8f4629-18a0-4f47-8c4e-be83cac2aa61)
+
 
 A simple webapp to display real-time weather information.
 
